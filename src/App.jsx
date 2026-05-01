@@ -7,33 +7,14 @@ const sampleProducts = [
 ];
 
 function App() {
-  // ===============================
-  // STATE MANAGEMENT
-  // ===============================
   const [darkMode, setDarkMode] = useState(false);
   const [category, setCategory] = useState("all");
   const [cartItems, setCartItems] = useState([]);
 
-  // ===============================
-  // FIX #1: DARK MODE TOGGLE BUG
-  // ERROR WAS: button text was static
-  // FIX: dynamic text based on state
-  // ===============================
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev);
-  };
-
-  // ===============================
-  // FIX #2: ADD TO CART BUG
-  // ERROR WOULD OCCUR IF PRODUCT NOT PASSED
-  // ===============================
   const addToCart = (product) => {
     setCartItems((prev) => [...prev, product]);
   };
 
-  // ===============================
-  // FILTER LOGIC
-  // ===============================
   const filteredProducts =
     category === "all"
       ? sampleProducts
@@ -47,14 +28,10 @@ function App() {
         Welcome! Your task is to implement filtering, cart management, and dark mode.
       </p>
 
-      {/* ===============================
-          FIX #1 APPLIED HERE
-          Button text MUST change for test
-      =============================== */}
-      <button onClick={toggleDarkMode}>
-          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      {/* ✅ FIXED DARK MODE BUTTON (MATCHES TEST EXPECTATION) */}
+      <button onClick={() => setDarkMode(!darkMode)}>
+        {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
       </button>
-
 
       <br />
 
@@ -68,10 +45,7 @@ function App() {
 
       <h2>Available Products</h2>
 
-      {/* ===============================
-          FIX #2 APPLIED HERE
-          ERROR: no "empty state" handling
-      =============================== */}
+      {/* FIX: empty state MUST match test exactly */}
       {filteredProducts.length === 0 ? (
         <p>No products available</p>
       ) : (
