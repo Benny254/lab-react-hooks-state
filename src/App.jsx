@@ -7,14 +7,30 @@ const sampleProducts = [
 ];
 
 function App() {
+  // =========================
+  // STATE
+  // =========================
   const [darkMode, setDarkMode] = useState(false);
   const [category, setCategory] = useState("all");
   const [cartItems, setCartItems] = useState([]);
 
+  // =========================
+  // DARK MODE TOGGLE
+  // =========================
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
+
+  // =========================
+  // CART LOGIC
+  // =========================
   const addToCart = (product) => {
     setCartItems((prev) => [...prev, product]);
   };
 
+  // =========================
+  // FILTER LOGIC
+  // =========================
   const filteredProducts =
     category === "all"
       ? sampleProducts
@@ -28,13 +44,20 @@ function App() {
         Welcome! Your task is to implement filtering, cart management, and dark mode.
       </p>
 
-      {/* ✅ FIXED DARK MODE BUTTON (MATCHES TEST EXPECTATION) */}
-      <button onClick={() => setDarkMode(!darkMode)}>
+      {/* =========================
+          DARK MODE BUTTON (FIXED)
+          - MUST BE DYNAMIC
+          - MUST MATCH TEST EXPECTATIONS
+      ========================= */}
+      <button onClick={toggleDarkMode}>
         {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
       </button>
 
       <br />
 
+      {/* =========================
+          FILTER DROPDOWN
+      ========================= */}
       <label>Filter by Category: </label>
 
       <select value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -43,9 +66,11 @@ function App() {
         <option value="Dairy">Dairy</option>
       </select>
 
+      {/* =========================
+          PRODUCTS
+      ========================= */}
       <h2>Available Products</h2>
 
-      {/* FIX: empty state MUST match test exactly */}
       {filteredProducts.length === 0 ? (
         <p>No products available</p>
       ) : (
@@ -68,7 +93,9 @@ function App() {
         ))
       )}
 
-      {/* CART */}
+      {/* =========================
+          CART
+      ========================= */}
       <Cart cartItems={cartItems} />
     </div>
   );
