@@ -6,7 +6,7 @@ import '@testing-library/jest-dom'
 
 test('toggles dark mode on button click', () => {
   render(<App />)
-  const toggleBtn = screen.getByRole('button', { name: /toggle/i })
+  const toggleBtn = screen.getByRole('button', { name: /switch to dark mode/i })
   expect(toggleBtn).toBeInTheDocument()
 
   fireEvent.click(toggleBtn)
